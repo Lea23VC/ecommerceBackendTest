@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Http\Resources\ProductResource;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $items_per_page = $request->input("items_per_page");
+        return ProductResource::collection(Product::filter($request->all())->paginate($items_per_page));
     }
 
     /**
@@ -48,7 +51,8 @@ class ProductController extends Controller
     public function show($id)
     {
         //
-        dd(Product::firstWhere('id', $id)->name);
+
+        return $this->sendResponse(new ProductResource(Product::find($id)), "Product retrieved successfully");
     }
 
     /**

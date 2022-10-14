@@ -20,4 +20,9 @@ class Product extends Model
     ];
 
     protected $table = 'product';
+
+    public function modelFilter()
+    {
+        return $this->provideFilter(\App\ModelFilters\ProductFilter::class);
+    }
 }
