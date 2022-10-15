@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Http\Resources\CategoryResource;
 
 class CategoryController extends BaseController
 {
@@ -13,9 +14,10 @@ class CategoryController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        return CategoryResource::collection(Category::filter($request->all())->get());
     }
 
     /**
@@ -48,6 +50,7 @@ class CategoryController extends BaseController
     public function show($id)
     {
         //
+        return $this->sendResponse(new CategoryResource(Category::find($id)), "Category retrieved successfully");
     }
 
     /**

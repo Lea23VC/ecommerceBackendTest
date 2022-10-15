@@ -17,6 +17,10 @@ class Category extends Model
 
     protected $table = 'category';
 
+    public function modelFilter()
+    {
+        return $this->provideFilter(\App\ModelFilters\CategoryFilter::class);
+    }
 
     public function products()
     {
