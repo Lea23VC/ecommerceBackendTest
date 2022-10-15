@@ -5,7 +5,15 @@
     },
     "routes": [{
         "src": "/(.*)",
-        "dest": "/api/index.php"
+        "dest": "/api/index.php",
+        
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+
+          }
     }],
     "env": {
         "APP_ENV": "production",
@@ -24,4 +32,5 @@
         "SESSION_DRIVER": "cookie"
 
     }
+
 }
