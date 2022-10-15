@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use EloquentFilter\Filterable;
+use App\Models\Category;
 
 class Product extends Model
 {
@@ -15,7 +16,7 @@ class Product extends Model
         'url_image',
         'price',
         'discount',
-        'category',
+
 
     ];
 
@@ -24,5 +25,10 @@ class Product extends Model
     public function modelFilter()
     {
         return $this->provideFilter(\App\ModelFilters\ProductFilter::class);
+    }
+
+    public function category_()
+    {
+        return $this->belongsTo(Category::class, "category");
     }
 }
