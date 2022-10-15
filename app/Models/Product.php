@@ -16,7 +16,7 @@ class Product extends Model
         'url_image',
         'price',
         'discount',
-        'category',
+
 
     ];
 
@@ -27,8 +27,8 @@ class Product extends Model
         return $this->provideFilter(\App\ModelFilters\ProductFilter::class);
     }
 
-    public function category()
+    public function category_()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, "category");
     }
 }
