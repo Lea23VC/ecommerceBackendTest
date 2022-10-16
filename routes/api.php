@@ -16,8 +16,10 @@ use App\Http\Controllers\API\CategoryController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['cors'])->group(function () {
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
 });
-Route::resource('products', ProductController::class);
-Route::resource('categories', CategoryController::class);
