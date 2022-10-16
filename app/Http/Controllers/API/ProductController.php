@@ -6,6 +6,9 @@ use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Resources\ProductResource;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Log;
 
 class ProductController extends BaseController
 {
@@ -17,8 +20,24 @@ class ProductController extends BaseController
     public function index(Request $request)
     {
         //
+
+        $validator = Validator::make($request->all(), [
+            "name" => "string",
+            "category" => "int",
+            "products_by_price_order" => [Rule::in(["desc", "asc"])],
+            'products_by_name_order' => [Rule::in(["desc", "asc"])],
+            'products_by_discount_order' => [Rule::in(["desc", "asc"])],
+
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError("Validation Error", $validator->errors());
+        }
+        Log::debug($validator->validated());
+
+
         $items_per_page = $request->input("items_per_page");
-        return ProductResource::collection(Product::filter($request->all())->paginate($items_per_page));
+        return ProductResource::collection(Product::filter(($validator->validated()))->paginate($items_per_page));
     }
 
     /**

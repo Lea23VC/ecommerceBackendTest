@@ -57,4 +57,19 @@ class ProductFilter extends ModelFilter
             return $q->where("category", $category);
         });
     }
+
+    public function productsByPriceOrder($order): ProductFilter
+    {
+        return $this->orderBy("price", $order);
+    }
+
+    public function productsByNameOrder($order): ProductFilter
+    {
+        return $this->orderBy("name", $order);
+    }
+
+    public function productsByDiscountOrder($order): ProductFilter
+    {
+        return $this->orderBy("discount", $order);
+    }
 }
