@@ -1,66 +1,306 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Project: Ecommerce Test Backend
+Este backend fue desarrollado en Laravel.  
+  
+Desarrollado para un test de selección, se encarga de crear una APIrest usando una base de datos ya existente de productos y categorias.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<b>Link repositorio del frontend:</b> https://github.com/Lea23VC/ecommerceFrontendTest
 
-## About Laravel
+## Rutas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+El APIrest se utilizá a través GET requests en las siguientes rutas, las cuales devuelve su respuesta en formato JSON.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| **Ruta** | **Detalle** |
+| --- | --- |
+| /products | Obtiene los productos de la base datos |
+| /products/1 | Obtiene los datos del producto con ID especificado (ej: 1) |
+| /categories | Obtiene todas las categorías del a BBDD |
+| /categories/1 | Obtiene los datos de la categoría con ID especificado (ej: 1) |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Paginación
 
-## Learning Laravel
+La paginación del API, se utilizá través de los parametros: **page** y **items_per_page.**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- items_per_page: Cantidad de items por pagina
+- page: pagina actual de la paginación
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## End-point: Lista de productos
+### Metodo: GET
+>```
+>/products
+>```
+### Parametros de consulta
 
-## Laravel Sponsors
+|Parametros|Detalle|
+|---|---|
+|name|(string) Nombre de producto|
+|products_by_name_order|(string) Orden según nombre ("asc" o "desc")|
+|products_by_price_order|(string) Orden según precio ("asc" o "desc")|
+|products_by_discount_order|(string) Orden según descuento ("asc" o "desc")|
+|category|(int) ID de la categoría|
+|min_price|(int) precio minimo|
+|max_price|(int) precio maximo|
+|min_discount|(int) descuento minimo|
+|max_discount|(int) descuento maximo|
+|items_per_page|(int) Cantidad de elementos por pagina|
+|page|(int) Pagina actual|
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Resultado de consulta (JSON)
 
-### Premium Partners
+```json
+{
+    "data": [
+        {
+            "id": 5,
+            "name": "ENERGETICA MR BIG",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/misterbig3308256.jpg",
+            "price": 1490,
+            "discount": 20
+        },
+        {
+            "id": 6,
+            "name": "ENERGETICA RED BULL",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/redbull8381.jpg",
+            "price": 1490,
+            "discount": 0
+        },
+        {
+            "id": 7,
+            "name": "ENERGETICA SCORE",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/logo7698.png",
+            "price": 1290,
+            "discount": 0
+        },
+        {
+            "id": 8,
+            "name": "PISCO ALTO DEL CARMEN 35º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/alto8532.jpg",
+            "price": 7990,
+            "discount": 10
+        },
+        {
+            "id": 9,
+            "name": "PISCO ALTO DEL CARMEN 40º ",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/alto408581.jpg",
+            "price": 5990,
+            "discount": 0
+        },
+        {
+            "id": 10,
+            "name": "PISCO ARTESANOS 35º ",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/artesanos8818.jpg",
+            "price": 3990,
+            "discount": 0
+        },
+        {
+            "id": 11,
+            "name": "PISCO BAUZA 40º ",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/bauza408831.jpg",
+            "price": 4990,
+            "discount": 0
+        },
+        {
+            "id": 12,
+            "name": "PISCO CAMPANARIO 35º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/campanario8845.jpg",
+            "price": 2990,
+            "discount": 20
+        },
+        {
+            "id": 13,
+            "name": "PISCO CAMPANARIO 40º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/campanario408881.jpg",
+            "price": 3990,
+            "discount": 20
+        },
+        {
+            "id": 14,
+            "name": "PISCO ESPIRITU DEL ELQUI 40º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/espiritu8936.jpg",
+            "price": 5990,
+            "discount": 20
+        },
+        {
+            "id": 15,
+            "name": "PISCO ESPIRITU DEL ELQUI 45º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/espiritu8957.jpg",
+            "price": 6990,
+            "discount": 5
+        },
+        {
+            "id": 16,
+            "name": "PISCO HORCON QUEMADO 35º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/horcon359049.jpg",
+            "price": 6990,
+            "discount": 20
+        },
+        {
+            "id": 17,
+            "name": "PISCO HORCON QUEMADO 40º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/horcon409062.jpg",
+            "price": 7990,
+            "discount": 20
+        },
+        {
+            "id": 18,
+            "name": "PISCO HORCON QUEMADO 46º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/horcon469075.jpg",
+            "price": 8990,
+            "discount": 20
+        },
+        {
+            "id": 19,
+            "name": "PISCO MISTRAL 35º",
+            "url_image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/mistral359200.jpg",
+            "price": 4990,
+            "discount": 20
+        }
+    ],
+    "links": {
+        "first": "http://ecommerce-backend-test.vercel.app/products?page=1",
+        "last": "http://ecommerce-backend-test.vercel.app/products?page=4",
+        "prev": null,
+        "next": "http://ecommerce-backend-test.vercel.app/products?page=2"
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 4,
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://ecommerce-backend-test.vercel.app/products?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": "http://ecommerce-backend-test.vercel.app/products?page=2",
+                "label": "2",
+                "active": false
+            },
+            {
+                "url": "http://ecommerce-backend-test.vercel.app/products?page=3",
+                "label": "3",
+                "active": false
+            },
+            {
+                "url": "http://ecommerce-backend-test.vercel.app/products?page=4",
+                "label": "4",
+                "active": false
+            },
+            {
+                "url": "http://ecommerce-backend-test.vercel.app/products?page=2",
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "path": "http://ecommerce-backend-test.vercel.app/products",
+        "per_page": 15,
+        "to": 15,
+        "total": 57
+    }
+}
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+#### Ejemplos
 
-## Contributing
+>```
+>/products?items_per_page=15
+>/products?name=energetica
+>/products?name=energetica&items_per_page=5&category=2&products_by_price_order=asc
+>```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## End-point: Producto especifico
+### Metodo: GET
+>```
+>/products/:id
+>```
+### Resultado de consulta (JSON)
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```json
+{
+   "success":true,
+   "data":{
+      "id":5,
+      "name":"ENERGETICA MR BIG",
+      "url_image":"https:\/\/dojiw2m9tvv09.cloudfront.net\/11132\/product\/misterbig3308256.jpg",
+      "price":1490,
+      "discount":20
+   },
+   "message":"Product retrieved successfully"
+}
+```
 
-## License
+#### Ejemplos
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+>```
+>/products/5
+>/products/7
+>```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Categorias
+### Metodo: GET
+>```
+>/categories
+>```
+
+
+### Parametros de consulta
+
+|Parametros|Detalle|
+|---|---|
+|category|(int) ID de la categoría|
+
+
+
+
+### Resultado de consulta (JSON)
+
+
+```json
+{
+   "data":[
+      {
+         "id":1,
+         "name":"bebida energetica"
+      },
+      {
+         "id":2,
+         "name":"pisco"
+      },
+      {
+         "id":3,
+         "name":"ron"
+      },
+      {
+         "id":4,
+         "name":"bebida"
+      },
+      {
+         "id":5,
+         "name":"snack"
+      },
+      {
+         "id":6,
+         "name":"cerveza"
+      },
+      {
+         "id":7,
+         "name":"vodka"
+      }
+   ]
+}
+```
+_________________________________________________
+Powered By: [postman-to-markdown](https://github.com/bautistaj/postman-to-markdown/)
