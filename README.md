@@ -1,6 +1,6 @@
 <a href="https://gitmoji.dev">
   <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
-</a> ![Vercel](https://vercelbadge.vercel.app/api/[Lea23VC]/[ecommerceBackendTest])
+</a> ![Vercel](https://vercelbadge.vercel.app/api/Lea23VC/ecommerceBackendTest)
 
 # Project: Ecommerce Test Backend
 Este backend fue desarrollado en Laravel.  
