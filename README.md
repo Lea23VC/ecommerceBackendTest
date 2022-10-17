@@ -1,9 +1,17 @@
+<a href="https://gitmoji.dev">
+  <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
+</a> ![Vercel](https://vercelbadge.vercel.app/api/[Lea23VC]/[ecommerceBackendTest])
+
 # Project: Ecommerce Test Backend
 Este backend fue desarrollado en Laravel.  
   
 Desarrollado para un test de selección, se encarga de crear una APIrest usando una base de datos ya existente de productos y categorias.
 
-<b>Link repositorio del frontend:</b> https://github.com/Lea23VC/ecommerceFrontendTest
+<b>Link repositorio del frontend:</b>
+https://github.com/Lea23VC/ecommerceFrontendTest
+
+<b>Link deploy backend en Vercel:</b>
+https://ecommerce-backend-test.vercel.app/
 
 ## Rutas
 
